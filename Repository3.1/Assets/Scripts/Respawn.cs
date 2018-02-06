@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Respawn : MonoBehaviour
 {
@@ -10,7 +11,11 @@ public class Respawn : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Death")
+        {
             player.transform.position = respawnPoint.transform.position;
+        }
     }
+
+   
 
 }

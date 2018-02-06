@@ -53,7 +53,7 @@ public class PressurePlate : MonoBehaviour {
             UIA.DoorOpen = false;
         mass = 0;   //Reset mass.
         delay = true;   //Engae the delay.
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         delay = false;  //End the delay.
     }
 }
