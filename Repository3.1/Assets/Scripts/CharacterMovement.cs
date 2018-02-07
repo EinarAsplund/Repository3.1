@@ -25,7 +25,8 @@ public class CharacterMovement : MonoBehaviour {
 
     Transform thingToPush; // null if nothing, else a link to some pullable crate.
 
-    
+    Quaternion lookRight;
+    Quaternion lookLeft;
 
     // Use this for initialization
     private void Start ()
@@ -33,6 +34,10 @@ public class CharacterMovement : MonoBehaviour {
         cc = gameObject.GetComponent<CharacterController>() as CharacterController;
         rb = gameObject.GetComponent<Rigidbody>() as Rigidbody;
         animator = GetComponent<Animator>();
+        // assuming character starts looking to the right:
+        lookRight = transform.rotation;
+        // calculate rotation flipped 180 degrees:
+        lookLeft = lookRight * Quaternion.Euler(0, 180, 0);
     }
 
     // Update is called once per frame
@@ -91,12 +96,26 @@ public class CharacterMovement : MonoBehaviour {
             previousHit = null;
             hit = null;
             currentWallJumps = 0;
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0); //Get the value of the virtual x axis. Y and Z are set to zero.
+
+            //Uncomment & turn character 90 degrees to activate switching directions
+            moveDirection = Vector3.zero;
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.rotation = lookRight;
+                moveDirection = Vector3.forward;
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                transform.rotation = lookLeft;
+                moveDirection = Vector3.forward;
+            }
+
+            //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0); //Get the value of the virtual x axis. Y and Z are set to zero.
             moveDirection = transform.TransformDirection(moveDirection);    //Transform direction from local to worldspace.
             moveDirection *= speed; //Multiply the direction of travel with the speed.
             animator.SetFloat("BlendX", Input.GetAxis("Horizontal"));
 
-          if (animator.GetFloat("BlendX") > 0)
+          if (animator.GetFloat("BlendX") > 0 || animator.GetFloat("BlendX") < 0)
             {
                 animator.SetBool("Running", true);
             }
