@@ -49,7 +49,7 @@ public class ShrinkAndGrow : MonoBehaviour
                     //Change stuff here
                     cm.MaxWallJumps = 0;
                     cm.RB.mass = 15;
-                    cm.JumpSpeed = 20;
+                    cm.JumpSpeed = 30;
                     cm.PushF = 25;
                     cm.SlideTimer = 0;
                     break;

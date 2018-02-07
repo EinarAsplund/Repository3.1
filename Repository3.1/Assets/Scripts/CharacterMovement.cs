@@ -1,26 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterMovement : MonoBehaviour {
 
-    private CharacterController cc;
+    public Text scoreText;
     private float speed = 5f;
     private float jumpSpeed = 20f;
     private float gravity = 50;
-    private Vector3 moveDirection = Vector3.zero;
+    private float pushF = 0f; //Change to make boxes movable or not.
+    private float slideSpeed = 1;
+    private float slideTimer = 0.5f;
     private Rigidbody rb;
+    private Vector3 moveDirection = Vector3.zero;
     private Vector3 wallClimb = new Vector3(4, 20, 0);
     private Vector3 wallDrop = new Vector3(1, 20, 0);
     private Vector3 wallLeap = new Vector3(10, 10, 0);
-    private float pushF = 0f; //Change to make boxes movable or not.
+    private CharacterController cc;
     private ControllerColliderHit hit;
     private ControllerColliderHit previousHit;
     private bool isWallSliding = false;
-    private float slideSpeed = 1;
     private int maxWallJumps = 1;
     private int currentWallJumps = 0;
-    private float slideTimer = 0.5f;
+    private int Score;
 
     Transform thingToPush; // null if nothing, else a link to some pullable crate.
 
@@ -31,6 +34,8 @@ public class CharacterMovement : MonoBehaviour {
     {
         cc = gameObject.GetComponent<CharacterController>() as CharacterController;
         rb = gameObject.GetComponent<Rigidbody>() as Rigidbody;
+        Score = 0;
+        SetCountText();
     }
 
     // Update is called once per frame
@@ -73,9 +78,14 @@ public class CharacterMovement : MonoBehaviour {
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
             other.gameObject.GetComponent<BoxCollider>().enabled = false;
             Destroy(other.gameObject, 0.3f);
+            Score = Score + 1;
+            SetCountText();
         }
     }
-
+    void SetCountText()
+    {
+        scoreText.text = "Score:" + Score.ToString();
+    }
     private void GroundMovement() // Move on he ground.
     {
         if (cc.isGrounded)
