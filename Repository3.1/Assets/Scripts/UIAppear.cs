@@ -8,6 +8,7 @@ public class UIAppear : MonoBehaviour {
     [SerializeField] private Text customText;
     [SerializeField] private Transform player;
     [SerializeField] private Transform respawnPoint;
+    private HealthTracker ht;
 
     private static float lastTeleport;
 
@@ -31,12 +32,18 @@ public class UIAppear : MonoBehaviour {
     {
     }
 
+    private void Start()
+    {
+        ht = FindObjectOfType <HealthTracker>() as HealthTracker;        
+    }
+
     void Update()
     {
         if (PlayerIsNearby)
         {
             if (doorOpen && Input.GetKeyDown(KeyCode.E) && CanTeleport)
             {
+                ht.RespawnPoint = respawnPoint;//////
                 lastTeleport = Time.time;
                 player.transform.position = respawnPoint.transform.position;
             }

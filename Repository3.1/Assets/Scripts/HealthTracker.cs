@@ -6,48 +6,66 @@ using UnityEngine.UI;
 public class HealthTracker : MonoBehaviour {
 
     [SerializeField]
-    private Image heart1, heart2, heart3;
+    private Image heart1;
+    [SerializeField]
+    private Text healthText;
+    [SerializeField]
+    private Button pauseButton, playButton;
     private int health = 3;
 
     [SerializeField] private Transform player;
     [SerializeField] private Transform respawnPoint;
+
+    private bool invincible = false;
+    private ShrinkAndGrow sag;
+
+    public Transform RespawnPoint
+    {
+        set { respawnPoint = value; }
+    }
+
+    private void Start()
+    {
+        sag = gameObject.GetComponent<ShrinkAndGrow>() as ShrinkAndGrow;
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Death")
         {
             player.transform.position = respawnPoint.transform.position;
-            health -= 1;
+            if (!invincible)
+            {
+                health--;
+                if(health <= 0)
+                {
+                    health = 0;
+                    Invoke("EndGame", 0.1f);
+                }
+            }
+
             SetHearts(health);
+            StartCoroutine("Delay");
         }
+    }
+
+    private IEnumerator Delay()
+    {
+        invincible = true;
+        yield return new WaitForSeconds(1f);
+        invincible = false;
+    }
+
+    private void EndGame()
+    {
+        Time.timeScale = 0;
+        pauseButton.interactable = false;
+        playButton.interactable = false;
+        sag.enabled = false;
     }
 
     private void SetHearts(int health)
     {
-        switch (health)
-        {
-            case 3:
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                break;
-            case 2:
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = false;
-                break;
-            case 1:
-                heart1.enabled = true;
-                heart2.enabled = false;
-                heart3.enabled = false;
-                break;
-            case 0:
-                heart1.enabled = false;
-                heart2.enabled = false;
-                heart3.enabled = false;
-                //Initiate End Game
-                break;
-        }
-
+        healthText.text = health.ToString();
     }
 }
