@@ -72,6 +72,7 @@ public class CharacterMovement : MonoBehaviour {
 
         if (!cc.isGrounded && hit.gameObject.tag == "Wall") //When hitting a wall and not on the ground, do stuff.
         {
+            animator.SetBool("OnTheWall", true);
             WallSliding();
             WallJumping();                     
         }        
@@ -90,6 +91,7 @@ public class CharacterMovement : MonoBehaviour {
 
     private void GroundMovement() // Move on he ground.
     {
+        animator.SetBool("OnTheWall", false);
         if (cc.isGrounded)
         {
             animator.SetBool("Jump", false);
@@ -100,12 +102,12 @@ public class CharacterMovement : MonoBehaviour {
             //Uncomment & turn character 90 degrees to activate switching directions
             moveDirection = Vector3.zero;
             if (Input.GetKey(KeyCode.D))
-            {
+            {             
                 transform.rotation = lookRight;
-                moveDirection = Vector3.forward;
+                moveDirection = Vector3.forward;  
             }
             else if (Input.GetKey(KeyCode.A))
-            {
+            {               
                 transform.rotation = lookLeft;
                 moveDirection = Vector3.forward;
             }
@@ -157,7 +159,7 @@ public class CharacterMovement : MonoBehaviour {
     private void WallSliding() // Slide on walls for some duration.
     {
         if (!isWallSliding && previousHit == null || !isWallSliding && !ReferenceEquals(hit.gameObject, previousHit.gameObject))
-        {
+        {         
             StartCoroutine("IsWallSliding");
         }
 
