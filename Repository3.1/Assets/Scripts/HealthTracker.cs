@@ -9,11 +9,16 @@ public class HealthTracker : MonoBehaviour {
     private Image heart1, heart2, heart3;
     private int health = 3;
 
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform respawnPoint;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Death")
         {
+            player.transform.position = respawnPoint.transform.position;
             health -= 1;
+            SetHearts(health);
         }
     }
 

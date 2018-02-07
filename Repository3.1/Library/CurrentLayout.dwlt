@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -327,19 +327,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scripts/UI
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scripts/UI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Einar\Documents\GitHub\Repository3.1\Repository3.1
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: fc2b0000
-    m_LastClickedID: 11260
-    m_ExpandedIDs: 0000000074280000c82a0000fc2b000000ca9a3bffffff7f
+    m_SelectedIDs: 7a2d0000
+    m_LastClickedID: 11642
+    m_ExpandedIDs: 00000000b82a0000442d0000822e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -367,7 +367,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000074280000
+    m_ExpandedIDs: 00000000b82a0000442d0000822e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -449,7 +449,7 @@ MonoBehaviour:
     width: 309
     height: 710
   m_PersistentViewDataDictionary: {fileID: 0}
-  m_ScrollPosition: {x: 0, y: 527.9551}
+  m_ScrollPosition: {x: 0, y: 339.95508}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 160
@@ -485,23 +485,23 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5c2f0000
-    m_LastClickedID: 12124
-    m_ExpandedIDs: 8aaef6ff7617f8ff98fbffff000000000e2e0000462e0000ae2f0000
+    m_SelectedIDs: 8e300000
+    m_LastClickedID: 12430
+    m_ExpandedIDs: 98f7ffff000000004e320000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Heart2
-      m_OriginalName: Heart2
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -654446
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.21971792, y: 0.13790129, z: -0.031389497, w: 0.96525747}
     speed: 2
-    m_Value: {x: 0.21971792, y: 0.13790129, z: -0.031389497, w: 0.96525747}
+    m_Value: {x: -0.21971792, y: -0.13790129, z: 0.031389497, w: -0.96525747}
   m_Size:
     m_Target: 516.2713
     speed: 2

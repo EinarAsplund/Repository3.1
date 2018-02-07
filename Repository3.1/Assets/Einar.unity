@@ -894,7 +894,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 77830468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede5547bf78f9914ea39f3bd6980e420, type: 3}
+  m_Script: {fileID: 11500000, guid: 8759ea87f2ad53148b7259bb97a37777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &77830471
@@ -12042,7 +12042,6 @@ GameObject:
   - component: {fileID: 1876940172}
   - component: {fileID: 1876940166}
   - component: {fileID: 1876940165}
-  - component: {fileID: 1876940173}
   - component: {fileID: 1876940174}
   m_Layer: 0
   m_Name: Character
@@ -12171,19 +12170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768010245c4cc554fae9b4cfe072be90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1876940173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1876940164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 353f2dfd42fdb714b9c51d4e5908c7f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1876940171}
-  respawnPoint: {fileID: 1209420707}
 --- !u!114 &1876940174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12198,6 +12184,8 @@ MonoBehaviour:
   heart1: {fileID: 1139145299}
   heart2: {fileID: 336571985}
   heart3: {fileID: 983615108}
+  player: {fileID: 1876940171}
+  respawnPoint: {fileID: 1209420707}
 --- !u!1001 &1885896571
 Prefab:
   m_ObjectHideFlags: 0

@@ -60,14 +60,14 @@ public class ShrinkAndGrow : MonoBehaviour
 
     private bool ChangeSize() //Changes the character size if within bondraries.
     {
-        if (currentSize != CurrentSize.Large && Input.GetMouseButtonDown(0))
+        if (currentSize != CurrentSize.Large && Input.GetKeyDown(KeyCode.W))
         {
             transform.localScale = new Vector3(transform.localScale.x * 2, transform.localScale.y * 2, transform.localScale.z * 2);
             cc.radius -= 0.2f;
             currentSize += 1;
             return true;
         }
-        if (currentSize != CurrentSize.Small && Input.GetMouseButtonDown(1))
+        if (currentSize != CurrentSize.Small && Input.GetKeyDown(KeyCode.S))
         {
             transform.localScale = new Vector3(transform.localScale.x / 2, transform.localScale.y / 2, transform.localScale.z / 2);
             cc.radius += 0.2f;
