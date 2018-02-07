@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour {
 
+    private Animator animator;
     private CharacterController cc;
     private float speed = 5f;
     private float jumpSpeed = 20f;
@@ -23,19 +24,15 @@ public class CharacterMovement : MonoBehaviour {
     private float slideTimer = 0.5f;
 
     Transform thingToPush; // null if nothing, else a link to some pullable crate.
-    Quaternion lookRight;
-    Quaternion lookLeft;
 
+    
 
     // Use this for initialization
     private void Start ()
     {
         cc = gameObject.GetComponent<CharacterController>() as CharacterController;
         rb = gameObject.GetComponent<Rigidbody>() as Rigidbody;
-        // assuming character starts looking to the right:
-        lookRight = transform.rotation;
-        // calculate rotation flipped 180 degrees:
-        lookLeft = lookRight * Quaternion.Euler(0, 180, 0);
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,6 +46,10 @@ public class CharacterMovement : MonoBehaviour {
         //{
         //    moveDirection.x = Input.GetAxis("Horizontal") * speed;
         //} 
+
+
+      
+
         moveDirection.y -= gravity * Time.deltaTime;    
         cc.Move(moveDirection * Time.deltaTime);    //Apply gravity & perform move.
     }
@@ -58,11 +59,12 @@ public class CharacterMovement : MonoBehaviour {
         previousHit = this.hit;
         this.hit = hit;
 
-        if (hit.gameObject.tag == "Crate")  //Find a pushable object.
+        if (hit.gameObject.tag == "Crate" && cc.isGrounded )  //Find a pushable object.
         {
-            thingToPush = hit.transform;
+            Push();
         }
-           
+
+
         if (!cc.isGrounded && hit.gameObject.tag == "Wall") //When hitting a wall and not on the ground, do stuff.
         {
             WallSliding();
@@ -81,35 +83,56 @@ public class CharacterMovement : MonoBehaviour {
         }
     }
 
-    private void GroundMovement() // Move on the ground.
+    private void GroundMovement() // Move on he ground.
     {
         if (cc.isGrounded)
         {
+            animator.SetBool("Jump", false);
             previousHit = null;
             hit = null;
             currentWallJumps = 0;
-
-            //Uncomment & turn character 90 degrees to activate switching directions
-            //moveDirection = Vector3.zero;
-            //if (Input.GetKey(KeyCode.D))
-            //{
-            //    transform.rotation = lookRight;
-            //    moveDirection = Vector3.forward;
-            //}
-            //else if (Input.GetKey(KeyCode.A))
-            //{
-            //    transform.rotation = lookLeft;
-            //    moveDirection = Vector3.forward;
-            //}
-
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0); //Get the value of the virtual x axis. Y and Z are set to zero. Disable if directional code is active.                
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0); //Get the value of the virtual x axis. Y and Z are set to zero.
             moveDirection = transform.TransformDirection(moveDirection);    //Transform direction from local to worldspace.
             moveDirection *= speed; //Multiply the direction of travel with the speed.
+            animator.SetFloat("BlendX", Input.GetAxis("Horizontal"));
+
+          if (animator.GetFloat("BlendX") > 0)
+            {
+                animator.SetBool("Running", true);
+            }
+          else
+            {
+                animator.SetBool("Running", false);
+            }
+
             if (Input.GetKey(KeyCode.Space))
             {
                 moveDirection.y = jumpSpeed;    //Jump if space is pressed.
+                animator.SetBool("Running", false);
+                animator.SetBool("Jump", true);
+               
+
             }
         }
+    }
+
+    private void Push()
+    {
+       
+        StartCoroutine(Pushing());
+    }
+
+    IEnumerator Pushing()
+    {
+        animator.SetBool("Pushing", true);
+        thingToPush = hit.transform;
+        float timer = 10;
+        while (timer > 0 && animator.GetBool("Running") == false && animator.GetBool("Jump") == false)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        animator.SetBool("Pushing", false);
     }
 
     private void WallSliding() // Slide on walls for some duration.
