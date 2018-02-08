@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class HealthTracker : MonoBehaviour {
 
     [SerializeField]
-    private Image heart1;
+    private Image heart1, defeat, victory;
     [SerializeField]
     private Text healthText;
     [SerializeField]
     private Button pauseButton, playButton;
     private int health = 3;
+    private bool victoryCheck = false;
 
     [SerializeField] private Transform player;
     [SerializeField] private Transform respawnPoint;
@@ -22,6 +23,11 @@ public class HealthTracker : MonoBehaviour {
     public Transform RespawnPoint
     {
         set { respawnPoint = value; }
+    }
+
+    public bool VictoryCHeck
+    {
+        set { victoryCheck = value; }
     }
 
     private void Start()
@@ -58,6 +64,14 @@ public class HealthTracker : MonoBehaviour {
 
     private void EndGame()
     {
+        if (health <= 0)
+        {
+            defeat.enabled = true;
+        }
+        else if (victoryCheck)
+        {
+            victory.enabled = true;
+        }
         Time.timeScale = 0;
         pauseButton.interactable = false;
         playButton.interactable = false;

@@ -24,7 +24,8 @@ public class CharacterMovement : MonoBehaviour {
     private float slideTimer = 0.5f;
 
     Transform thingToPush; // null if nothing, else a link to some pullable crate.
-
+    [SerializeField]
+    private HealthTracker ht;
     Quaternion lookRight;
     Quaternion lookLeft;
 
@@ -33,6 +34,7 @@ public class CharacterMovement : MonoBehaviour {
     {
         cc = gameObject.GetComponent<CharacterController>() as CharacterController;
         rb = gameObject.GetComponent<Rigidbody>() as Rigidbody;
+        ht = gameObject.GetComponent<HealthTracker>() as HealthTracker;
         animator = GetComponent<Animator>();
         // assuming character starts looking to the right:
         lookRight = transform.rotation;
@@ -86,6 +88,11 @@ public class CharacterMovement : MonoBehaviour {
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
             other.gameObject.GetComponent<BoxCollider>().enabled = false;
             Destroy(other.gameObject, 0.3f);
+        }
+        else if (other.gameObject.CompareTag("Goal"))
+        {
+            ht.VictoryCHeck = true;
+            ht.Invoke("EndGame", 0.1f);
         }
     }
 
