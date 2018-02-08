@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33881655006862024}
   - component: {fileID: 23804174288403520}
   - component: {fileID: 95387988989357108}
+  - component: {fileID: 65277812818285884}
   m_Layer: 0
   m_Name: PelarePrefab
   m_TagString: Untagged
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1906027772204610}
   m_Mesh: {fileID: 4300000, guid: 4b6c10173e6c7d6458f6c9fea6ac855b, type: 3}
+--- !u!65 &65277812818285884
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1906027772204610}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0199945, y: 0.10238675, z: 0.008408289}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95387988989357108
 Animator:
   serializedVersion: 3

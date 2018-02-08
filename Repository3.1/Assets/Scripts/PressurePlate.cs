@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour {
-
+   [SerializeField]
     protected float weightLimit = 5;
     private Collider[] colliders;
     private Vector3 range;

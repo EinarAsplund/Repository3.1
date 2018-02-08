@@ -29,7 +29,7 @@ public class ShrinkAndGrow : MonoBehaviour
                     //Change stuff here
                     cm.MaxWallJumps = 2;
                     cm.RB.mass = 5;
-                    cm.JumpSpeed = 15;
+                    cm.JumpSpeed = 20;
                     cm.PushF = 0;
                     cm.WallClimb = new Vector3(4, 25, 0);
                     cm.WallLeap = new Vector3(13, 10, 0);
@@ -39,7 +39,7 @@ public class ShrinkAndGrow : MonoBehaviour
                     //Change stuff here
                     cm.MaxWallJumps = 1;
                     cm.RB.mass = 10;
-                    cm.JumpSpeed = 20;
+                    cm.JumpSpeed = 25;
                     cm.PushF = 0;
                     cm.WallClimb = new Vector3(4, 20, 0);
                     cm.WallLeap = new Vector3(10, 10, 0);
